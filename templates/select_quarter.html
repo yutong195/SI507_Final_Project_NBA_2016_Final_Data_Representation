@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Quarter</title>
+    <!-- Add additional metadata and links to CSS here -->
+</head>
+<body>
+    <h1>Select a Quarter for {{ game_name }}</h1>
+    <form action="" method="post">
+        {% for quarter in quarters %}
+        <input type="radio" id="{{ quarter }}" name="quarter" value="{{ quarter }}">
+        <label for="{{ quarter }}">{{ quarter }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+    <!-- Add additional scripts here -->
+</body>
+</html>

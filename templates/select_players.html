@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Players</title>
+</head>
+<body onload="initPlayerLists()">
+    <a href="{{ url_for('select_game_for_player') }}">Back to game selection</a>
+    <h1>Select Players from {{ game_name }}</h1>
+    <form action="#" method="get">
+        <div>
+            <label for="team1">Team 1:</label>
+            <select name="team1" id="team1" onchange="updatePlayerList('team1', 'player1')">
+                {% for team in team_players.keys() %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+            <label for="player1">Player 1:</label>
+            <select name="player1" id="player1">
+                <!-- Player options will be filled by JavaScript -->
+            </select>
+        </div>
+        <div>
+            <label for="team2">Team 2:</label>
+            <select name="team2" id="team2" onchange="updatePlayerList('team2', 'player2')">
+                {% for team in team_players.keys() %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+            <label for="player2">Player 2:</label>
+            <select name="player2" id="player2">
+                <!-- Player options will be filled by JavaScript -->
+            </select>
+        </div>
+        <button type="submit" onclick="submitForm()">Compare Players</button>
+    </form>
+
+    <script>
+        var teamPlayers = {{ team_players | tojson }};
+        
+        function initPlayerLists() {
+            // Assuming the first two keys in team_players are the teams you want to initialize
+            var initialTeams = Object.keys(teamPlayers).slice(0, 2);
+            document.getElementById('team1').value = initialTeams[0];
+            document.getElementById('team2').value = initialTeams[1];
+
+            updatePlayerList('team1', 'player1');
+            updatePlayerList('team2', 'player2');
+        }
+
+        function updatePlayerList(teamSelectId, playerSelectId) {
+            var teamSelect = document.getElementById(teamSelectId);
+            var playerSelect = document.getElementById(playerSelectId);
+            var selectedTeam = teamSelect.value;
+            var players = teamPlayers[selectedTeam];
+
+            playerSelect.innerHTML = ''; // Clear current player options
+
+            players.forEach(function(player) {
+                playerSelect.options.add(new Option(player, player));
+            });
+        }
+
+        function submitForm() {
+            // Prevent the form from submitting normally to allow setting the action dynamically
+            event.preventDefault();
+            var form = document.querySelector('form');
+            var team1 = document.getElementById('team1').value;
+            var player1 = document.getElementById('player1').value;
+            var team2 = document.getElementById('team2').value;
+            var player2 = document.getElementById('player2').value;
+            var gameName = "{{ game_name }}";
+            form.action = "/compare_players/" + gameName + "/" + encodeURIComponent(team1) + "/" + encodeURIComponent(player1) + "/" + encodeURIComponent(team2) + "/" + encodeURIComponent(player2);
+            form.submit();
+        }
+    </script>
+</body>
+</html>

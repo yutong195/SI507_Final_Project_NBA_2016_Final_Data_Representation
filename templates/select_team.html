@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Team</title>
+    <!-- Add additional metadata and links to CSS here -->
+</head>
+<body>
+    <h1>Select a Team</h1>
+    <form action="{{ url_for('select_team') }}" method="post">
+        {% for team in teams %}
+        <input type="radio" id="{{ team }}" name="team" value="{{ team }}">
+        <label for="{{ team }}">{{ team }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+    <!-- Add additional scripts here -->
+</body>
+</html>

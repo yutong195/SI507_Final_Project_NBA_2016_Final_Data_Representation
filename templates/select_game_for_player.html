@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Select Game</title>
+</head>
+<body>
+    <h1>Select a Game</h1>
+    <ul>
+        {% for game in games %}
+            <li><a href="{{ url_for('select_players', game_name=game) }}">{{ game }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
