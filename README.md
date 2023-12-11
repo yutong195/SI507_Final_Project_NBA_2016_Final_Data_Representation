@@ -6,6 +6,7 @@ Running the code:
 - Then run the `construct_tree.py`. This code will read all the CSV files and construct the tree data structure to hold all the data.
 - Finally, run the `data_vis_interaction.py` file and after it is running, copy and paste the local ip address (`http://127.0.0.1:5000`) to a search engine to open up the Flask app. The Flask app uses Plotly to visualize the data and enables several interesting interactions which would be introduced in the following content. You have to keep the python file running in order to open the online Flask app.
 <be><br><br>
+
 Data Structure:
 
 - **Structure**
