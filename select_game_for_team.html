@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Game</title>
+    
+</head>
+<body>
+    <h1>Select a Game for {{ team_name }}</h1>
+    <form action="" method="post">
+        {% for game in games %}
+        <input type="radio" id="{{ game }}" name="game" value="{{ game }}">
+        <label for="{{ game }}">{{ game }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>

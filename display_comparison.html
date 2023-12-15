@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparison of Teams</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+</head>
+<body>
+    <h1>Comparison between {{ team1 }} and {{ team2 }} for {{ quarter }}</h1>
+    <div id="comparison" style="width:600px;height:400px;"></div>
+    <script>
+        var graphs = {{ graphJSON | safe }};
+        Plotly.newPlot('comparison', graphs);
+    </script>
+    
+</body>
+</html>

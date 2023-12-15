@@ -121,7 +121,7 @@ def calculate_scores_by_quarter(data):
                         if quarter in quarter_info['data']:
                             team_scores.append(quarter_info['data'][quarter]['FG%'])
                         else:
-                            # This handles the case where there's no OT, so we add a 0 score for OT
+                            
                             team_scores.append(0)
             
             # Assign the scores list to the corresponding team and game
@@ -230,17 +230,15 @@ def display_comparison(game_name, quarter):
     # Render the display_comparison template with the graph
     return render_template('display_comparison.html', graphJSON=graphJSON, team1=team1_name, team2=team2_name)
 
-# You'll also need to update the create_comparison_chart function to handle missing data.
-# Here's how you might modify it:
 
 def create_comparison_chart(team1_data, team2_data, team1_name, team2_name):
-    # Assuming we have a list of statistics to compare, we'll iterate over them
-    stats_to_compare = ['PTS', 'AST', 'REB', 'STL', 'BLK']  # Add more stats as per your data
+    
+    stats_to_compare = ['PTS', 'AST', 'REB', 'STL', 'BLK']  
     fig = go.Figure()
 
-    # Add bars for team 1
+    
     for stat in stats_to_compare:
-        team1_stat_value = team1_data.get(stat, 0)  # Use 0 if stat is missing
+        team1_stat_value = team1_data.get(stat, 0) 
         fig.add_trace(go.Bar(
             name=f'{team1_name} {stat}',
             x=[team1_stat_value],
@@ -249,18 +247,18 @@ def create_comparison_chart(team1_data, team2_data, team1_name, team2_name):
             marker=dict(color='blue')
         ))
 
-    # Add bars for team 2
+
     for stat in stats_to_compare:
-        team2_stat_value = team2_data.get(stat, 0)  # Use 0 if stat is missing
+        team2_stat_value = team2_data.get(stat, 0)  
         fig.add_trace(go.Bar(
             name=f'{team2_name} {stat}',
-            x=[-team2_stat_value],  # Negative value for opposite side comparison
+            x=[-team2_stat_value],  
             y=[stat],
             orientation='h',
             marker=dict(color='red')
         ))
 
-    # Update the layout to suit a side-by-side comparison
+    
     fig.update_layout(barmode='overlay', title='Team Comparison by Stat')
     return fig
 
